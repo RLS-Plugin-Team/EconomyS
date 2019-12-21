@@ -142,10 +142,10 @@ class EconomyJob extends PluginBase implements Listener {
 		switch (array_shift($params)) {
 			case "join":
 				if(!$sender instanceof Player) {
-					$sender->sendMessage("Please run this command in-game.");
+					$sender->sendMessage("[Job] ゲーム内で実行してください");
 				}
 				if($this->player->exists($sender->getName())) {
-					$sender->sendMessage("You already have joined job.");
+					$sender->sendMessage("§b【運営】 >> §cあなたは既に就職しています");
 				}else{
 					$job = array_shift($params);
 					if(trim($job) === "") {
@@ -154,22 +154,22 @@ class EconomyJob extends PluginBase implements Listener {
 					}
 					if($this->jobs->exists($job)) {
 						$this->player->set($sender->getName(), $job);
-						$sender->sendMessage("You have joined to the job \"$job\"");
+						$sender->sendMessage("§b【運営】 >> §e{$job}に就職しました");
 					}else{
-						$sender->sendMessage("There's no job named \"$job\"");
+						$sender->sendMessage("§b【運営】 >> §c{$job}という職業はありません");
 					}
 				}
 				break;
 			case "retire":
 				if(!$sender instanceof Player) {
-					$sender->sendMessage("Please run this command in-game.");
+					$sender->sendMessage("[Job] ゲーム内で実行してください");
 				}
 				if($this->player->exists($sender->getName())) {
 					$job = $this->player->get($sender->getName());
 					$this->player->remove($sender->getName());
-					$sender->sendMessage("You have retired from the job \"$job\"");
+					$sender->sendMessage("§b【運営】 >> §e{$job}を退職しました");
 				}else{
-					$sender->sendMessage("You don't have job that you've joined");
+					$sender->sendMessage("§b【運営】 >> §cあなたは就職していません");
 				}
 				break;
 			case "list":
@@ -190,7 +190,7 @@ class EconomyJob extends PluginBase implements Listener {
 				$current = 1;
 				$n = 1;
 
-				$output = "Showing job list page $page of $max : \n";
+				$output = "職業リスト page $page of $max : \n";
 				foreach($this->jobs->getAll() as $name => $job) {
 					$info = "";
 					foreach($job as $id => $money) {
@@ -208,12 +208,12 @@ class EconomyJob extends PluginBase implements Listener {
 				break;
 			case "me":
 				if(!$sender instanceof Player) {
-					$sender->sendMessage("Please run this command in-game.");
+					$sender->sendMessage("[Job] ゲーム内で実行してください");
 				}
 				if($this->player->exists($sender->getName())) {
-					$sender->sendMessage("Your job : " . $this->player->get($sender->getName()));
+					$sender->sendMessage("§b【運営】 >> §eあなたの職業 : " . $this->player->get($sender->getName()));
 				}else{
-					$sender->sendMessage("You don't have any jobs you've joined.");
+					$sender->sendMessage("§b【運営】 >> §eあなたは就職していません");
 				}
 				break;
 			default:
