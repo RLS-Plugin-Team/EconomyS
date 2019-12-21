@@ -759,4 +759,10 @@ class EconomyLand extends PluginBase implements Listener {
 	public function checkOverlap($startX, $endX, $startZ, $endZ, $level) {
 		return $this->db->checkOverlap($startX, $endX, $startZ, $endZ, $level);
 	}
+        
+        public function getOwner($x,$z,$level){
+                $info = $this->db->getByCoord($x, $z, $level);
+                return $info;
+        }
+
 }
